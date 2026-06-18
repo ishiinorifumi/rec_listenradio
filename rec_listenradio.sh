@@ -2,20 +2,13 @@
 #
 # rec_listenradio.sh - ListenRadio（リスラジ）録音スクリプト
 #
-# uru2/rec_radiko_ts (https://github.com/uru2/rec_radiko_ts) を参考にした
-# リスラジ版の録音ツール。
-#
-# radiko と違いリスラジは認証トークン不要・ライブ配信のみ（タイムフリー無し）
-# のため、本スクリプトは指定チャンネルを「今から指定時間ぶん」録音する。
-# 出力は mp3（既定）または m4a。ビットレートも指定できる。
-#
 # License: MIT (c) 2026 ISHII Norifumi
 # 本スクリプト及び本ツールは、ListenRadio とそのサービス及び
 # 株式会社ディーピーエヌとは一切関係がありません。
 #
 # 必要なもの:
 #   - ffmpeg（必須。環境変数 FFMPEG で実行パスを上書き可。例: vendor/ffmpeg.exe）
-#   - curl, jq（任意。あれば局名・番組名を取得してタグ／ファイル名に使う）
+#   - curl, jq（任意。あれば局名を取得してタグ／ファイル名に使う）
 #
 # 例:
 #   ./rec_listenradio.sh -c 30011 -d 30
@@ -131,7 +124,7 @@ else
   exit 1
 fi
 
-# ---- 局名・番組名の取得（curl と jq があれば。失敗しても続行）----
+# ---- 局名の取得（curl と jq があれば。失敗しても続行）----
 station=""
 program=""
 if command -v curl >/dev/null 2>&1 && command -v jq >/dev/null 2>&1; then
